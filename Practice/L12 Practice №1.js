@@ -18,7 +18,6 @@ personalMovieDB.movies[questionFilm] = questionRating;
 console.log(personalMovieDB);
 
 
-
 // const numberOfFilms = +prompt("Сколько фильмов вы уже посмотрели?", '');
 
 // const personalMovieDB = {
