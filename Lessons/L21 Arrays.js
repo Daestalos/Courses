@@ -46,7 +46,7 @@ const array = [1, 2, 3 , 6, 8];
 // 3: ссылка на массив, который мы перебираем
 // данная функция является callback функцией. (сначала ForEach, а потом Callback)
 array.forEach(function(item, i, array){
-    console.log(`${i}: ${item} внутри массива ${array}`)
+    console.log(`${i}: ${item} внутри массива ${array}`);
     // = 0: 1 внутри массива 1,2,3,6,8      и т.д.
 });
 
