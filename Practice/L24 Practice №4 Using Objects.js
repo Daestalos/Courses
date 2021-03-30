@@ -10,12 +10,10 @@ const personalMovieDB = {
     genres: [],
     privat: false,
     start: function(){
-        while (this.count == '' || this.count == null || isNaN(this.count)) {
+        
+        while (personalMovieDB.count == '' || personalMovieDB.count == null || isNaN(personalMovieDB.count)) {
             // isNan проверяет введено ли число, если не число, то возвращает true
-            // personalMovieDB.count можно заменить this, т.к. в данном случае this будет обращаться к родителю
-            // т.е к объекту personalMovieDB и получится запись (personalMovieDB.count)
-            // p.s this = personalMovieDB, т.к. при вызове функции мы в начале указали объект, иначе было бы undefiend
-            this.count = prompt("Сколько фильмов вы уже посмотрели?", '');
+            personalMovieDB.count = prompt("Сколько фильмов вы уже посмотрели?", '');
         }
     },
     rememberMyFilms: function(){
@@ -44,13 +42,6 @@ const personalMovieDB = {
             alert('Произошла ошибка');
         }
     },
-    toggleVisibleMyDB: function(hidden){
-        if (!hidden){
-            personalMovieDB.privat = true;
-        } else {
-            personalMovieDB.privat = false;
-        }
-    },
     showMyDB: function(hidden){
         if (!hidden){
             console.log(personalMovieDB);
@@ -65,12 +56,11 @@ const personalMovieDB = {
 
 
 
-//personalMovieDB.start();
-//personalMovieDB.rememberMyFilms();
-//personalMovieDB.detectPersonalLevel();
-personalMovieDB.toggleVisibleMyDB(personalMovieDB.privat);
+personalMovieDB.start();
+personalMovieDB.rememberMyFilms();
+personalMovieDB.detectPersonalLevel();
 personalMovieDB.showMyDB(personalMovieDB.privat);
-//personalMovieDB.writeYourGenres();
+personalMovieDB.writeYourGenres();
 
 
 
