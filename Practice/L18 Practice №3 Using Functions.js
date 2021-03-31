@@ -86,7 +86,7 @@ showMyDB(personalMovieDB.privat);
 
 // function writeYourGenres (){
 //     for (let i = 1; i <=3; i++) {   
-//         const genresName = prompt('Ваш любивый жанр под номером ' + i + ':'); 
+//         const genresName = prompt('Ваш любимый жанр под номером ' + i + ':'); 
 //         personalMovieDB.genres[i--] = [genresName];
 //     }
 // }
