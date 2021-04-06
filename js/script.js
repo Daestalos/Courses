@@ -1,70 +1,76 @@
-/* Задания на урок:
-
-1) Удалить все рекламные блоки со страницы (правая часть сайта)
-
-2) Изменить жанр фильма, поменять "комедия" на "драма"
-
-3) Изменить задний фон постера с фильмом на изображение "bg.jpg". Оно лежит в папке img.
-Реализовать только при помощи JS
-
-4) Список фильмов на странице сформировать на основании данных из этого JS файла.
-Отсортировать их по алфавиту 
-
-5) Добавить нумерацию выведенных фильмов */
-
 'use strict';
+// справочники по событиям
+// https://oddler.ru/blog/i63
+// https://developer.mozilla.org/ru/docs/Web/Events
 
-const movieDB = {
-    movies: [
-        "Логан",
-        "Лига справедливости",
-        "А-ла лэнд",
-        "Одержимость",
-        "Скотт Пилигрим против..."
-    ]
+const btn = document.querySelector('button'),
+      overlay = document.querySelector('.overlay');
+
+// такой вариант не используется в реальных проектах
+// при назначении другого метода, он заменит данный
+// не использовать данный метод.
+btn.onclick = function(){
+    alert('Click');
 };
 
-
-// const div = document.getElementsByClassName('promo__adv')[0].remove(),
-//       promoGenre = document.getElementsByClassName('promo__genre')[0].innerHTML = 'ДРАМА',
-//       bg = document.getElementsByClassName('promo__bg')[0].style.cssText = 'background: url("../img/bg.jpg")',
-//       liMovieDB = document.querySelectorAll('.promo__interactive-item');  
-
-     
-
-// for (let i = 0; i <= movieDB.movies.length; i++){
-//     movieDB.movies.sort();
-//     liMovieDB[i].innerHTML = `${i+1}: ${movieDB.movies[i]}`;
-// }
+//правильный обработчик событий:
+// первым аргументом передаем название, вторым callback функцию
+btn.addEventListener('click', () =>{
+    alert('Click');
+}); 
+// с данным обработчиком событий мы можем использовать неисколько обработчиков
+// Они не будут друг друга заменять, а выполнятся поочередно
+// btn.addEventListener('click', () =>{
+//     alert('Second click');
+// }); 
 
 
 
-const adv = document.querySelectorAll('.promo__adv img'),
-      poster = document.querySelector('.promo__bg'),
-      genre = poster.querySelector('.promo__genre'),
-      movieList = document.querySelector('.promo__interactive-list');
+/////////!!!!!!!!!!!!!\\\\\\\\\
+// addEventListener
+// выполняется каждый раз при наведении мышки на элемент
+// если нам в callback функцию нужно передать еще какие-то аргументы (текстовые данные или просто данные)
+// то в скобках указываем объект события и аргумент со своими данными
+// (e (или event), (например text))
+btn.addEventListener('mouseenter', () =>{
+    console.log('hover'); // это событие передается как аргумент в callback функцию
+}); 
 
-adv.forEach(item =>{
-item.remove();
-});
-// в другом виде
-// adv.forEach(function (item){
-//     item.remove();
-//     });
+btn.addEventListener('mouseenter', (e) =>{
+   console.log(e.target);
+   e.target.remove(); // при наведении удалили элемент со страницы
+}); 
 
-genre.textContent = 'Драма';
+// другой вариант, более удобный
+const deleteElement = (e) => {
+    e.target.remove();
+};
 
-poster.style.backgroundImage = 'url("img/bg.jpg")';
-
-movieList.innerHTML = '';
-
-movieDB.movies.sort();
+btn.addEventListener('click', deleteElement);
 
 
-movieDB.movies.forEach((film, i) => {
-    movieList.innerHTML += ` 
-    <li class="promo__interactive-item">${i+1}: ${film}
-        <div class="delete"></div>
-    </li>
-    `;
-});
+///!!!!!!!!!!!!!\\\
+/// removeEventListener
+let i = 0;
+const Elementview = (e) => {
+    console.log(e.target);
+    i++;
+    if (i == 1) {
+        btn.removeEventListener('click', Elementview); // удаляем обработчик
+    }
+};
+
+btn.addEventListener('click', Elementview); // назначаем обработчик
+
+
+
+
+// current target
+const View = (e) => {
+    console.log(e.target);
+    console.log(e.type);
+};
+
+btn.addEventListener('click', View); // назначаем обработчик
+overlay.addEventListener('click', View);
+
