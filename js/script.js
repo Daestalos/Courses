@@ -1,76 +1,37 @@
 'use strict';
-// справочники по событиям
-// https://oddler.ru/blog/i63
-// https://developer.mozilla.org/ru/docs/Web/Events
-
-const btn = document.querySelector('button'),
-      overlay = document.querySelector('.overlay');
-
-// такой вариант не используется в реальных проектах
-// при назначении другого метода, он заменит данный
-// не использовать данный метод.
-btn.onclick = function(){
-    alert('Click');
-};
-
-//правильный обработчик событий:
-// первым аргументом передаем название, вторым callback функцию
-btn.addEventListener('click', () =>{
-    alert('Click');
-}); 
-// с данным обработчиком событий мы можем использовать неисколько обработчиков
-// Они не будут друг друга заменять, а выполнятся поочередно
-// btn.addEventListener('click', () =>{
-//     alert('Second click');
-// }); 
+// https://developer.mozilla.org/ru/docs/Learn/HTML/Howto/Use_data_attributes
 
 
+// console.log(document.body);
+// console.log(document.documentElement);
+// console.log(document.body.childNodes); // (псевдоколлекция) выводит узлы, которые дети body.
+// console.log(document.body.firstChild);
+// console.log(document.body.lastChild);
+// console.log(document.body.lastElementChild);
 
-/////////!!!!!!!!!!!!!\\\\\\\\\
-// addEventListener
-// выполняется каждый раз при наведении мышки на элемент
-// если нам в callback функцию нужно передать еще какие-то аргументы (текстовые данные или просто данные)
-// то в скобках указываем объект события и аргумент со своими данными
-// (e (или event), (например text))
-btn.addEventListener('mouseenter', () =>{
-    console.log('hover'); // это событие передается как аргумент в callback функцию
-}); 
+// можно прописать parentElement, чтобы получить конкретно родительский элемент.
+console.log(document.querySelector('#current').parentNode.parentNode);
 
-btn.addEventListener('mouseenter', (e) =>{
-   console.log(e.target);
-   e.target.remove(); // при наведении удалили элемент со страницы
-}); 
+// [] - получить атрибут html, в скобках название атрибута, затем устанавливаем ее значение
+console.log(document.querySelector('[data-current="3"]').nextSibling);
+// nextsibling - получить следующую ноду
 
-// другой вариант, более удобный
-const deleteElement = (e) => {
-    e.target.remove();
-};
+console.log(document.querySelector('[data-current="3"]').previousSibling);
+// previousSibling - получить предыдущую ноду (если в html будет пробел, то мы получим его (textовую ноду))
 
-btn.addEventListener('click', deleteElement);
+console.log(document.querySelector('[data-current="3"]').nextElementSibling);
+// nextElementSibling - получит следующий именно элемент.
 
+console.log(document.querySelector('[data-current="3"]').previousElementSibling);
+// nextElementSibling - получит следующий именно элемент.
 
-///!!!!!!!!!!!!!\\\
-/// removeEventListener
-let i = 0;
-const Elementview = (e) => {
-    console.log(e.target);
-    i++;
-    if (i == 1) {
-        btn.removeEventListener('click', Elementview); // удаляем обработчик
+// перебор элементов в псевдомассивен
+// например задача перебрать всех clildNodes, котороые лежат в body и избавиться от всех
+// текстовых нод.
+for (let node of document.body.childNodes){
+    if (node.nodeName == '#text'){
+        continue;
     }
-};
-
-btn.addEventListener('click', Elementview); // назначаем обработчик
-
-
-
-
-// current target
-const View = (e) => {
-    console.log(e.target);
-    console.log(e.type);
-};
-
-btn.addEventListener('click', View); // назначаем обработчик
-overlay.addEventListener('click', View);
-
+    console.log();
+}
+// мы получаем только элементы (комментарии тоже, т.к. они не являются текстовыми нодами)
