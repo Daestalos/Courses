@@ -1,37 +1,52 @@
+/* Задания на урок:
+1) Реализовать функционал, что после заполнения формы и нажатия кнопки "Подтвердить" - 
+новый фильм добавляется в список. Страница не должна перезагружаться.
+Новый фильм должен добавляться в movieDB.movies.
+Для получения доступа к значению input - обращаемся к нему как input.value;
+P.S. Здесь есть несколько вариантов решения задачи, принимается любой, но рабочий.
+
+2) Если название фильма больше, чем 21 символ - обрезать его и добавить три точки
+
+3) При клике на мусорную корзину - элемент будет удаляться из списка (сложно)
+
+4) Если в форме стоит галочка "Сделать любимым" - в консоль вывести сообщение: 
+"Добавляем любимый фильм"
+
+5) Фильмы должны быть отсортированы по алфавиту */
+
 'use strict';
-// https://developer.mozilla.org/ru/docs/Learn/HTML/Howto/Use_data_attributes
 
+const movieDB = {
+    movies: [
+        "Логан",
+        "Лига справедливости",
+        "Ла-ла лэнд",
+        "Одержимость",
+        "Скотт Пилигрим против великанов"
+    ]
+};
 
-// console.log(document.body);
-// console.log(document.documentElement);
-// console.log(document.body.childNodes); // (псевдоколлекция) выводит узлы, которые дети body.
-// console.log(document.body.firstChild);
-// console.log(document.body.lastChild);
-// console.log(document.body.lastElementChild);
+const adv = document.querySelectorAll('.promo__adv img'),
+      poster = document.querySelector('.promo__bg'),
+      genre = poster.querySelector('.promo__genre'),
+      movieList = document.querySelector('.promo__interactive-list'),
+      dataInput = document.querySelector('.adding__input').value;
+adv.forEach(item => {
+    item.remove();
+});
 
-// можно прописать parentElement, чтобы получить конкретно родительский элемент.
-console.log(document.querySelector('#current').parentNode.parentNode);
+genre.textContent = 'драма';
+poster.style.backgroundImage = 'url("img/bg.jpg")';
+movieList.innerHTML = "";
 
-// [] - получить атрибут html, в скобках название атрибута, затем устанавливаем ее значение
-console.log(document.querySelector('[data-current="3"]').nextSibling);
-// nextsibling - получить следующую ноду
-
-console.log(document.querySelector('[data-current="3"]').previousSibling);
-// previousSibling - получить предыдущую ноду (если в html будет пробел, то мы получим его (textовую ноду))
-
-console.log(document.querySelector('[data-current="3"]').nextElementSibling);
-// nextElementSibling - получит следующий именно элемент.
-
-console.log(document.querySelector('[data-current="3"]').previousElementSibling);
-// nextElementSibling - получит следующий именно элемент.
-
-// перебор элементов в псевдомассивен
-// например задача перебрать всех clildNodes, котороые лежат в body и избавиться от всех
-// текстовых нод.
-for (let node of document.body.childNodes){
-    if (node.nodeName == '#text'){
-        continue;
+movieDB.movies.sort();
+movieDB.movies.forEach((film, i) => {
+    if (film.length > 21) {
+         film = film.substr(0, 21) + '...';
     }
-    console.log();
-}
-// мы получаем только элементы (комментарии тоже, т.к. они не являются текстовыми нодами)
+    movieList.innerHTML += `
+        <li class="promo__interactive-item">${i + 1} ${film}
+            <div class="delete"></div>
+        </li>
+    `;
+});
