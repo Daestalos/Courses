@@ -55,9 +55,11 @@ wrapper.append(div);
 //hearts[0].after(div); // после
 //wrapper.insertBefore(div, hearts[2]); // вставляем перед
 
+
 // удаление со страницы
 //circles[1].remove();
 //wrapper.removeChild(hearts[1]); // использовался раньше
+
 
 // replacewith - заменить один элемент другим
 // hearts[0].replaceWith(circles[0]);
