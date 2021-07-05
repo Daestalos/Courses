@@ -1,6 +1,6 @@
 // https://www.youtube.com/watch?v=Bluxbh9CaQ0
 // https://github.com/vladilenm/javascript-2020
-
+"use strict";
 
 // <<<<<<<<<<<<<<<basic>>>>>>>>>>>>>>>>>>>>>>>>>
 // 1 переменные
@@ -174,3 +174,161 @@ const num = 42; // int
 const float = 42.42; //float
 const pow = 10e3; // = 10000, в 3 степени
 console.log(pow);
+
+// 1 Number
+const num = 42 // integer
+const float = 42.42 // float
+const pow = 10e3
+
+console.log('MAX_SAFE_INTEGER', Number.MAX_SAFE_INTEGER)
+console.log('Math.pow 53', Math.pow(2, 53) - 1)
+console.log('MIN_SAFE_INTEGER', Number.MIN_SAFE_INTEGER)
+console.log('MAX_VALUE', Number.MAX_VALUE)
+console.log('MIN_VALUE', Number.MIN_VALUE)
+console.log('POSITIVE_INFINITY', Number.POSITIVE_INFINITY)
+console.log('NEGATIVE_INFINITY', Number.NEGATIVE_INFINITY)
+console.log('2 / 0', 2 / 0)
+console.log(Number.NaN) // Not A Number
+console.log(typeof NaN)
+const weird = 2 / undefined
+console.log(Number.isNaN(weird))
+console.log(Number.isNaN(42))
+console.log(Number.isFinite(Infinity))
+console.log(Number.isFinite(42))
+
+const stringInt = '40'
+const stringFloat = '40.42'
+console.log(Number.parseInt(stringInt) + 2)
+console.log(parseInt(stringInt) + 2)
+console.log(Number(stringInt) + 2)
+console.log(+stringInt + 2)
+console.log(parseFloat(stringFloat) + 2)
+console.log(+stringFloat + 2)
+
+console.log(0.4 + 0.2) // 0.6
+console.log(+(0.4 + 0.2).toFixed(1))
+console.log(parseFloat((0.4 + 0.2).toFixed(1))) // toFixed - количество знаков после запятой
+
+// 2 BigInt
+console.log(90071992547409919999999n - 9007199254740991999999n)
+console.log(-90071992547409919999999n)
+console.log(90071992547409919999999.23231n) // error
+
+console.log(10n - 4) // error
+console.log(parseInt(10n) - 4)
+console.log(10n - BigInt(4))
+console.log(5n / 2n) // 2n
+
+// 3 Math
+console.log(Math.E)
+console.log(Math.PI)
+
+console.log(Math.sqrt(25))
+console.log(Math.pow(5, 3))
+console.log(Math.abs(-42))
+console.log(Math.max(42, 12, 23, 11, 422))
+console.log(Math.min(42, 12, 23, 11, 422))
+console.log(Math.floor(4.9))
+console.log(Math.ceil(4.9))
+console.log(Math.round(4.4))
+console.log(Math.trunc(4.9))
+console.log(Math.random())
+
+// 4 Example
+function getRandomBetween(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+  
+  console.log(getRandomBetween(10, 42))
+
+let x = 70;
+let y = 80;
+[x, y] = [y,x];
+// let t = x;
+// x = y;
+// y = t;
+console.log(x, y);
+
+
+// <<<<<<<<<<<Строки>>>>>>>>>>>>>
+
+const name = "sasha";
+const agge = 21;
+const output = 'Привет, меня зовут ' + name + ' и мой возраст ' + agge;
+console.log(output);
+
+const outputt = `Привет, меня зовут ${name} и мой возраст ${agge < 20 ? 'A': 'B'}`;
+console.log(outputt);
+
+const outtput = `
+  <div>This is div</div>
+  <p>this is p</p>
+`
+
+console.log(outtput);
+
+const namee = "sasha";
+console.log(namee.length);
+console.log(namee.toUpperCase());
+console.log(namee.charAt(2));
+console.log(namee.indexOf('ha'));
+console.log(namee.toLowerCase().startsWith('sa'));
+console.log(namee.endsWith('ff'));
+
+const str = '              password           ';
+console.log(str.trim());
+console.log(str.trimLeft());
+console.log(str.trimRight());
+
+
+function logPerson(s, name, age) {
+    console.log(s, name, age);
+    if (age < 0){
+        age = 'Еще не родился'
+    }
+    return `${s[0]}${name}${s[1]}${age}${s[2]}`;
+}
+const personName = 'Sasha';
+const personAge = 21;
+const output = logPerson`Имя: ${personName}, возраст: ${personAge}`;
+
+const personName2 = 'Misha';
+const personAge2 = -10;
+const output2 = logPerson`Имя: ${personName2}, возраст: ${personAge2}`;
+console.log(output);
+console.log(output2);
+
+
+
+// <<<<<<<<<<<ФУНКЦИИ>>>>>>>>>>>>>
+
+
+// function Declaration
+// можем обращаться, когда захотим
+function greett(namme){
+    console.log('Привет - ', namme);
+}
+greett('Лена');
+
+// function Expression
+// можем использовать только после инициализации
+const greet2 = function (namme) {
+    console.log('Привет2 - ', namme);
+}
+greet2('Вася')
+
+console.log(typeof greett);
+// функция в js это объект
+
+// Анонимные функции
+let counter = 0;
+const interval = setInterval(function(){
+    if (counter === 5){
+    clearInterval(interval); // останавливает выполнение
+    }
+    else{
+        console.log(++counter);
+    }
+
+
+}, 1000)
