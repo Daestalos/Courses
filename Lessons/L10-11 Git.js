@@ -13,3 +13,6 @@ git checkout -b "имя" //создание ветки
 git checkout "имя" //переключение ветки
 git checkout main
 git merge work_with_web
+
+
+git pull // скачать изменения с сервера ко мне на локалку
