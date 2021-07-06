@@ -176,31 +176,31 @@ const pow = 10e3; // = 10000, в 3 степени
 console.log(pow);
 
 // 1 Number
-const num = 42 // integer
-const float = 42.42 // float
-const pow = 10e3
+const num = 42; // integer
+const float = 42.42; // float
+const pow = 10e3;
 
-console.log('MAX_SAFE_INTEGER', Number.MAX_SAFE_INTEGER)
-console.log('Math.pow 53', Math.pow(2, 53) - 1)
-console.log('MIN_SAFE_INTEGER', Number.MIN_SAFE_INTEGER)
-console.log('MAX_VALUE', Number.MAX_VALUE)
-console.log('MIN_VALUE', Number.MIN_VALUE)
-console.log('POSITIVE_INFINITY', Number.POSITIVE_INFINITY)
-console.log('NEGATIVE_INFINITY', Number.NEGATIVE_INFINITY)
+console.log('MAX_SAFE_INTEGER', Number.MAX_SAFE_INTEGER);
+console.log('Math.pow 53', Math.pow(2, 53) - 1);
+console.log('MIN_SAFE_INTEGER', Number.MIN_SAFE_INTEGER);
+console.log('MAX_VALUE', Number.MAX_VALUE);
+console.log('MIN_VALUE', Number.MIN_VALUE);
+console.log('POSITIVE_INFINITY', Number.POSITIVE_INFINITY);
+console.log('NEGATIVE_INFINITY', Number.NEGATIVE_INFINITY);
 console.log('2 / 0', 2 / 0)
-console.log(Number.NaN) // Not A Number
-console.log(typeof NaN)
-const weird = 2 / undefined
-console.log(Number.isNaN(weird))
-console.log(Number.isNaN(42))
-console.log(Number.isFinite(Infinity))
-console.log(Number.isFinite(42))
+console.log(Number.NaN); // Not A Number
+console.log(typeof NaN);
+const weird = 2 / undefined;
+console.log(Number.isNaN(weird));
+console.log(Number.isNaN(42));
+console.log(Number.isFinite(Infinity));
+console.log(Number.isFinite(42));
 
 const stringInt = '40'
 const stringFloat = '40.42'
-console.log(Number.parseInt(stringInt) + 2)
-console.log(parseInt(stringInt) + 2)
-console.log(Number(stringInt) + 2)
+console.log(Number.parseInt(stringInt) + 2);
+console.log(parseInt(stringInt) + 2);
+console.log(Number(stringInt) + 2);
 console.log(+stringInt + 2)
 console.log(parseFloat(stringFloat) + 2)
 console.log(+stringFloat + 2)
@@ -303,14 +303,14 @@ console.log(output2);
 // <<<<<<<<<<<ФУНКЦИИ>>>>>>>>>>>>>
 
 
-// function Declaration
+//1 function Declaration
 // можем обращаться, когда захотим
 function greett(namme){
     console.log('Привет - ', namme);
 }
 greett('Лена');
 
-// function Expression
+//2 function Expression
 // можем использовать только после инициализации
 const greet2 = function (namme) {
     console.log('Привет2 - ', namme);
@@ -320,7 +320,7 @@ greet2('Вася')
 console.log(typeof greett);
 // функция в js это объект
 
-// Анонимные функции
+//3 Анонимные функции
 let counter = 0;
 const interval = setInterval(function(){
     if (counter === 5){
@@ -332,3 +332,457 @@ const interval = setInterval(function(){
 
 
 }, 1000)
+
+// 4 Параметры по умолчанию
+
+function sumAll(...all){ // позволяет хранить внутри все передаваемые значения в виде массива 
+    let result = 0;
+    for (let num of all){
+        result += num
+    }
+    console.log(all); 
+    return result;
+}
+
+const res = sumAll(1,2,3,4,5)
+console.log(res);
+
+// 5 замыкания
+
+function createMember(name){ // замыкается параметр name
+    return function(lastName){ // ластнейм варьируется
+        console.log(name+lastName);
+    }
+}
+
+const logWithLastName = createMember('Sasha')
+console.log(logWithLastName(' Minin'));
+console.log(logWithLastName(' Alexandrov'));
+
+// приватные переменные, для защиты данных,
+// т.к. в JS нету нативного механизма, 
+//позволяющего делать приватные переменные
+ 
+
+// <<<<<<<<<<<Массивы>>>>>>>>>>>>>
+// Прототип - набор взаимосвязанных объектов, с помощью которых мы для тех или иных структур
+// данных добавляем определенный функционал
+// прототип у массива класс Array
+const carrs = ['Мазда','Форд','БМВ','Мерседес'];
+
+
+carrs.push('Митсубиси'); // в конец
+carrs.unshift('Волга'); // в начало
+console.log(carrs.length);
+console.log(carrs);
+carrs.shift() // удаляет 1 элемент, он так же возвращает этот элемент
+const first = carrs.shift();
+const last = carrs.pop(); // возвращает и удаляет последний элемент
+console.log(last);
+console.log(first);
+console.log(carrs);
+
+console.log(carrs.reverse());
+
+// Задача 1
+const text = 'Привет, изучаем';
+const reverseText = text.split(',');
+const reverseText1 = text.split('');  // разделяет строку и делает массивом
+console.log(reverseText); // [ 'Привет', ' изучаем' ]
+console.log(reverseText1);
+ // [
+//    'П', 'р', 'и', 'в',
+//    'е', 'т', ',', ' ',
+//    'и', 'з', 'у', 'ч',
+//    'а', 'е', 'м'
+//  ]
+
+
+const reverseTextt = text.split(',').reverse().join(' ');
+console.log(reverseTextt); //  изучаем Привет
+
+
+const carrss = ['Мазда','Форд','БМВ','Мерседес'];
+console.log(carrss.indexOf('БМВ')); // = 2
+const indexCar = carrss.indexOf('БМВ');
+carrss[indexCar] = 'Porche';
+console.log(carrss);
+
+
+const people =  [
+    {
+        name: 'Sahsa',
+        budget: 3000
+    },
+    {
+        name: 'Vika',
+        budget: 3500
+    },
+    {
+        name: 'dima',
+        budget: 4000
+    }
+]
+const indexPeople = people.findIndex(function(person){
+    console.log(person);
+    return person.budget === 3500;
+})
+console.log(indexPeople); // = 1
+console.log(people[indexPeople]); // { name: 'Vika', budget: 3500 }
+//
+const indexxPeople = people.find(function(person){
+    return person.budget === 3500;
+})
+console.log(indexxPeople); // { name: 'Vika', budget: 3500 }
+//
+let findedP
+for (const person of people) {
+    console.log('3');
+    if (person.budget === 3500){
+        findedP === person;
+    }
+}
+console.log(findedP);
+//
+const personn = people.find((personn) => {
+    return personn.budget === 3500
+})
+console.log(personn); // { name: 'Vika', budget: 3500 }
+//
+const personn2 = people.find(personn2 => personn2.budget === 3500)
+console.log(personn2); // { name: 'Vika', budget: 3500 }
+
+
+const caar = ['Мазда','Форд','БМВ','Мерседес'];
+const uppderCars = caar.map( car => car.toUpperCase())
+console.log(uppderCars); // [ 'МАЗДА', 'ФОРД', 'БМВ', 'МЕРСЕДЕС' ]
+
+
+const fib = [1, 1, 2, 3, 5, 8, 13];
+const pow2 = num => num **2
+const pow2fib2 = fib.map(pow2);
+console.log(pow2fib2);
+//
+const pow2fib = fib.map(num => num ** 2)
+console.log(pow2fib);
+//
+const sqrt = num => Math.sqrt(num);
+const pow2fib3 = fib.map(pow2).map(sqrt);
+console.log(pow2fib3);
+//
+const pow2fib4 = fib.map(pow2);
+const filtered = pow2fib4.filter( num => num>20)
+console.log(pow2fib4); // = [1, 1, 4, 9, 25, 64, 169]
+console.log(filtered); // = [ 25, 64, 169 ]
+
+
+//
+const people2 =  [
+    { name: 'Sahsa', budget: 3000},
+    { name: 'Vika', budget: 1500},
+    { name: 'dima', budget: 4000}
+]
+
+const allBudget = people2.reduce (function(acc, person) {
+    if (person.budget>2000) {
+        acc += person.budget;
+    }
+    return acc;
+}, 0)
+console.log(allBudget);
+//
+const allBudget2 = people2.filter(person => person.budget > 2000).reduce(function(acc, person) {
+    acc += person.budget;
+    return acc;
+}, 0)
+console.log(allBudget2);
+
+
+
+
+// <<<<<<<<<<<Объекты>>>>>>>>>>>>>
+
+const person = {
+    firstName: 'Sasha',
+    lastName: 'Min',
+    year: 2001,
+    lang: ['ru', 'en', 'de', 'pl'],
+    hasWife: true,
+    greet: function(){ // метод объекта
+        console.log('greet from person');
+        console.log(person);
+    },
+    greedis() { // тоже самое, что и объявление метода выше
+        console.log('greedis');
+        
+    },
+    'complex key': 'Complex value',
+    ['key_' +(1+3)] : 'Computed key' // key_4
+};
+
+console.log(person);
+console.log(person.firstName);
+console.log(person['firstName']); // тоже самое, что и верхняя строчка
+const key = 'lang';
+console.log(person[key]);
+person.hasWife = false;
+person.isProgrammer = true;
+person.greet();
+person.greedis
+console.log(person['complex key']);
+
+person.age++
+person.lang.push('by');
+person['key_4'] = undefined;
+console.log(person);
+
+delete person['key_4'];
+console.log(person);
+
+// 1 деструктиризация
+
+const name = person.name
+const age = person.age
+const lang = person.lang
+// пишем вот так
+const {name, age: personAge, lang} = person // поместили age в переменную personAge
+console.log(name, personAge, lang);
+
+
+
+//2 for in
+// он заходит в прототип, он опасен из-за этого
+const person = {
+    firstName: 'Sasha',
+    lastName: 'Min',
+    year: 2001,
+    lang: ['ru', 'en', 'de', 'pl'],
+    hasWife: true,
+    greet: function(){ // метод объекта
+        console.log('greet from person');
+        console.log(person);
+    },
+    greedis() { // тоже самое, что и объявление метода выше
+        console.log('greedis');
+        
+    },
+};
+
+for (let key in person) {
+    if (person.hasOwnProperty(key)){ //ЗАПОМНИТЬ!
+    console.log('key: '+key);
+    console.log('Value: '+ person[key]);
+    }
+}
+
+//
+const keyss = Object.keys(person); // возвращает массив!!!
+console.log('Keyss: '+keyss); // Keyss: firstName,lastName,year,lang,hasWife,greet,greedis
+
+keyss.forEach(key =>{
+    console.log('key: '+key);
+    console.log('Value: '+ person[key]);
+}) // выведет тот же самый результат, что и у метода выше с hasown
+
+
+//3 Context
+
+const person = {
+    firstName: 'Sasha',
+    lastName: 'Min',
+    year: 2001,
+    lang: ['ru', 'en', 'de', 'pl'],
+    hasWife: true,
+    greedis() { // тоже самое, что и объявление метода выше
+        console.log('greedis');
+        
+    },
+    info(){
+        console.log('Инфо про чел по имени:', this.firstName);    
+    }
+};
+person.info();
+
+
+// обычный метод
+const logger ={
+    keys(obj){
+        console.log('Object keys:', Object.keys(obj));
+        
+    }
+}
+logger.keys(person)
+// через this
+const loggerr ={
+    keys(){
+        console.log('Object keys:', Object.keys(this));
+        
+    }
+}
+const bound = loggerr.keys.bind(person);
+// с помощью метода bind мы говорим this, пусть там будет объект, 
+//который мы сами передадим
+// в нашем случае это person 
+bound();
+// метод call использует bind и сразу же ее вызывает, не нужно отдельно
+// объявлять
+loggerr.keys.call(person);
+
+
+// Вывести ключ и значение объекта person
+const person = {
+    firstName: 'Sasha',
+    lastName: 'Min',
+    year: 2001,
+    lang: ['ru', 'en', 'de', 'pl'],
+    hasWife: true,
+};
+
+const log = {
+    keys(){
+        Object.keys(this).forEach(key =>{
+            console.log(`${key}: ${this[key]}`);
+        })
+    },
+    withParams(top = false, between = false, bottom = false){
+        if (top){
+            console.log('------- Start ---------');
+        }
+        Object.keys(this).forEach((key, index, array) =>{
+            console.log(`${key}: ${this[key]}`);
+            if (between && index !== array.length -1)
+            {
+                console.log('---------------');    
+            }
+        })
+        if (bottom){
+            console.log('------- END ---------');
+        }
+    }
+        
+}
+
+log.keys.call({a: 1, b:2, c:3});
+// a: 1
+// b: 2
+// c: 3
+log.withParams.call(person, true, true, true) //call принимает в себя неограниченное кол-во параметров
+// ------- Start ---------
+// firstName: Sasha
+// ---------------
+// lastName: Min
+// ---------------
+// year: 2001
+// ---------------
+// lang: ru,en,de,pl
+// ---------------
+// hasWife: true
+// ------- END ---------
+log.withParams.apply(person, [true, true, true]); // apply принимает всего 2 параметра
+// ------- Start ---------
+// firstName: Sasha
+// ---------------
+// lastName: Min
+// ---------------
+// year: 2001
+// ---------------
+// lang: ru,en,de,pl
+// ---------------
+// hasWife: true
+// ------- END ---------
+//
+
+
+// <<<<<<<<<<<Ассинхронность>>>>>>>>>>>>>
+
+// выполняется спустя некоторое время
+const timeoyut = setTimeout(() => {
+    console.log('After timeout');
+}, 2500);
+clearTimeout(timeout);
+
+//выполняется с интервалом
+const interval = setInterval(() => {
+    console.log('After interval');
+}, 2500);
+clearInterval(interval);
+
+
+// пример задачи
+const delay = (callback, wait = 1000) => {
+    setTimeout(callback, wait)
+}
+delay(() =>{
+ console.log('After 2 sec');
+ 
+}, 2000)
+
+//1 Promises - преднозначены, чтобы убрать большой уровень вложности
+// resolve 
+const delayy = (wait = 1000) => {
+    const promise = new Promise( (resolve, reject) => { // resolve - говорит, что все хорошо
+        //reject- произошла какая-то ошибка
+        setTimeout(() => {
+         //   reject('Что-то пошло не так')
+            resolve()
+        }, wait)
+    })
+    return promise;
+ 
+}
+
+
+delayy(2500) // After 2 sec  Finally
+    .then( () =>{
+        console.log('After 2 sec');
+    })
+    .catch( err => console.error(err)
+    )
+    .finally(()=> {
+        console.log('Finally'); // выполняется в любом случае
+    })
+    // при resolve
+    // After 2 sec
+    // Finally
+    // при reject
+    // undefined (если ничего не указали, в нашем случае "Что-то пошло не так")
+    // Finally
+
+// пример 2
+
+const getData = () => new Promise(resolve => resolve ([
+    1, 1, 2, 3, 5 ,8, 13
+]))
+
+getData().then( data => console.log(data))
+//
+async function asyncExample () {
+    try {
+    await delay(3000) // только после выполнения этой строчки выполнится следующая
+    const data = await getData()
+    console.log(data);
+    } catch (e) {
+        console.log(e);
+    }
+    finally{
+        console.log('Finally');
+        
+    }
+}
+asyncExample()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
