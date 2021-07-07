@@ -8,10 +8,6 @@ console.log(typeof(strObj)); // объект
 
 console.dir([1, 2, 3]);
 
-
-
-
-
 const soldier = {
     health: 400,
     armor: 100,
@@ -22,7 +18,6 @@ const soldier = {
 
 ///!!!!!!!!\\\\
 ////Object.create
-
 const jonh = Object.create(soldier);
 
 // const jonh = {
@@ -38,3 +33,5 @@ Object.setPrototypeOf(jonh, soldier); //идентична записи выше
 
 console.log(jonh.armor); // = 100
 jonh.sayHello(); // = hello
+
+

@@ -172,3 +172,5 @@ function showUser(user){
 }
 
 pageLoader('https://jsonplaceholder.typicode.com/todos/1', getAJAX); // запуск функции
+
+
