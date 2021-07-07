@@ -1,5 +1,8 @@
 "use strict";
 
+//Функции, которые находятся в объекте в качестве его свойств, называются «методами».
+
+
 //const obj = new Object();
 
 const options = {
@@ -125,3 +128,9 @@ const opt = {
 const {border, bg} = opt.colors; // деструктиризация 
 console.log(border);
 opt.makeTest();
+
+
+
+
+
+

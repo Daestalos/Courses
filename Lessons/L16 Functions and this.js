@@ -141,3 +141,146 @@ const calct = (a, b) => {
     console.log('1');
     return a + b;
 };
+
+// Параметры по умолчанию
+
+function sumAll(...all){ // позволяет хранить внутри все передаваемые значения в виде массива 
+    let result = 0;
+    for (let num of all){
+        result += num
+    }
+    console.log(all); 
+    return result;
+}
+
+const res = sumAll(1,2,3,4,5)
+console.log(res);
+
+
+// ЗАМАКАНИЯ
+
+const createCount = (counter=0) => {
+    let count = counter;
+    return () => {
+        count++;
+        console.log(count);
+    };
+};
+
+
+const logcount = createCount(5);
+logcount();
+logcount();
+logcount();
+logcount();
+
+
+const sumsomesum = (a, b, c) =>{
+    let suma = a, sumb = b, sumc = c, sumall = 0;
+    return () =>{
+        sumall += suma + sumb + sumc;
+        console.log(sumall);
+    }
+    
+};
+const sum = sumsomesum(2,3,4);
+sum();
+
+
+function createMember(name){ // замыкается параметр name
+    return function(lastName){ // ластнейм варьируется
+        console.log(name+lastName)
+    }
+}
+
+const logWithLastName = createMember('Sasha')
+logWithLastName(' Minin');
+logWithLastName(' Alexandrov');
+
+// приватные переменные, для защиты данных,
+// т.к. в JS нету нативного механизма, 
+//позволяющего делать приватные переменные
+ 
+
+
+// <<<<<<<!!!!!!!!!!!!!!!!!!!!!!THIS!!!!!!!!!!!!!!!>>>>>>>>>
+// в нестрогом режиме всегда является ссылкой на объект
+// а в строгом режиме может иметь любое значение.
+// Значение this – это объект «перед точкой», который использовался для вызова метода.
+// У стрелочных функций нет «this»
+//Стрелочные функции особенные: у них нет своего «собственного» this. 
+// Если мы используем this внутри стрелочной функции то его значение берётся из внешней «нормальной» функции.
+
+
+let calculator = {
+    a: 2,
+    b: 3,
+    read (a = this.a, b = this.b) {
+        this.a = a;
+        this.b = b;
+    },
+    sum (){
+        let sum = 0;
+        sum = this.a + this.b;
+        console.log(sum);
+    },
+    mul(){
+        let mul = 0;
+        mul = this.a * this.b;
+        console.log(mul);
+    }
+  };
+  
+  calculator.read(10, 22);
+  calculator.sum();
+  calculator.mul();
+
+
+
+  let ladder = {
+    step: 0,
+    up() {
+    this.step++;
+    return this;
+    },
+    down() {
+     this.step--;
+     return this;
+    },
+    showStep: function() { // показывает текущую ступеньку
+      console.log( this.step );
+      return this;
+    }
+  };
+
+ladder.up();
+ladder.up();
+ladder.down();
+ladder.showStep(); // 1
+ladder.up().down().showStep();
+
+
+const tea = {
+    name: 'Чай',
+    price: 120,
+    getNameAndPrice
+};
+
+const coffe = {
+    name: 'Якобс',
+    price: 200
+}
+
+function getNameAndPrice() {
+    console.log(`Имя товара: ${this.name} и его цена ${this.price} $`);
+    return this;
+};
+
+function getPrice(currency = ''){
+    console.log(this.price + currency);
+    return this
+}
+
+tea.getNameAndPrice(); // Имя товара: Чай и его цена 120 $
+getPrice.apply(coffe, ['руб']); // 200руб
+getPrice.call(tea, '$'); // = 120$

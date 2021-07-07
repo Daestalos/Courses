@@ -37,13 +37,13 @@ console.log(typeof(parseInt('15px', 10))); //=number
 // 1)
 let switcher = null ;
 if (switcher){ // условие не выполнится, т.к. switcher = false
-    console.log('working...')
+    console.log('working...');
 }
 
 switcher = 1;
 
 if (switcher){ // теперь сработает, т.к. switcher = true
-    console.log('working...')
+    console.log('working...');
 }
 
 // 2)
